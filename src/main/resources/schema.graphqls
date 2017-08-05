@@ -1,0 +1,21 @@
+schema {
+    query: QueryType
+}
+
+type QueryType {
+    user(id: String!): User
+    location(id: String!): Location
+}
+
+type User {
+    id: String!
+    firstName: String
+    lastName: String
+    locations: [Location]!
+}
+
+type Location {
+    id: String!
+    city: String!
+    state: String!
+}
