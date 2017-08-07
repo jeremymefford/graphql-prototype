@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.Map;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
@@ -19,6 +21,19 @@ public class UserDataFetchers {
 
     @Resource
     private LocationService locationService;
+
+    public DataFetcher<User> createUserDataFetcher() {
+        return environment -> {
+            Map<String, Object> newUser = environment.getArgument("input");
+            log.debug("Saving user: {}", newUser);
+            return userService.saveUser(new User(
+                    "Id is replaced",
+                    (String) newUser.get("firstName"),
+                    (String) newUser.get("lastName"),
+                    Collections.emptyNavigableSet()
+            ));
+        };
+    }
 
     public DataFetcher<User> userDataFetcher() {
         return environment -> {

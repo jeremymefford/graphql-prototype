@@ -1,10 +1,21 @@
 schema {
     query: QueryType
+    mutation: MutationType
+}
+
+type MutationType {
+    createUser(input: UserInput!): User
+}
+
+input UserInput {
+    firstName: String
+    lastName: String
 }
 
 type QueryType {
     user(id: String!): User
     location(id: String!): Location
+
 }
 
 type User {

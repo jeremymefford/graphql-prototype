@@ -46,6 +46,8 @@ public class GraphQLSchemaBuilder implements GraphQlSchemaBuilder {
 
     private RuntimeWiring buildRuntimeWiring() {
         return RuntimeWiring.newRuntimeWiring()
+                .type("MutationType", typeWiring -> typeWiring
+                        .dataFetcher("createUser", userDataFetchers.createUserDataFetcher()))
                 .type("QueryType", typeWiring -> typeWiring
                         .dataFetcher("user", userDataFetchers.userDataFetcher())
                         .dataFetcher("location", locationDataFetchers.locationDataFetcher()))
